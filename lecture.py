@@ -17,16 +17,15 @@ while True:
 #         if file.startswith("output_") and file.endswith(".wav"):
 #             os.remove(file)
 
-    # je voudrais donc jouer le ouput_x.wav en commencant par le output_0.wav,
     # Get the list of all output files in the directory
-    for file in os.listdir():
-
-        if file.startswith("output_") and file.endswith(".wav"):
-
-            play_audio(file)
-            # je voudrais modifier le nom du fichier output_x.wav en output_x.wav.played
-            # Rename the file to indicate that it has been played
-            os.rename(file, f"{file}.played")
+    output_files = [file for file in os.listdir() if file.startswith("output_") and file.endswith(".wav")]
+    # Sort the output files in ascending order
+    output_files.sort()
+    # Play each output file sequentially
+    for file in output_files:
+        play_audio(file)
+        # Rename the file to indicate that it has been played
+        os.rename(file, f"{file}.played")
             
 
     # print("Output files:", output_files)
